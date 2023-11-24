@@ -7,7 +7,7 @@ Imagine um cenário em que um paciente em uma área remota pode receber um diagn
 
 
 ## Arquitetura
-![Diagram](https://i.imgur.com/sKhc9au.png)
+![Diagram](https://i.imgur.com/dII7CLz.png)
 
 ## Integrantes
 * João Victor Jales RM94673
@@ -17,7 +17,7 @@ Imagine um cenário em que um paciente em uma área remota pode receber um diagn
 
 Clone o repositório
 
-`git clone https`
+`git clone https://github.com/Matrodazz/DoutorVirtualAPI.git`
 
 Ajuste as configurações de login, porta, e endereço do Banco de dados no application.properties.
 A API cria as tabelas automaticamente no Oracle DataBase na primeira execução.
