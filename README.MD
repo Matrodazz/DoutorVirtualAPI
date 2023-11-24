@@ -13,6 +13,45 @@ Imagine um cenário em que um paciente em uma área remota pode receber um diagn
 * João Victor Jales RM94673
 * Vitor dos Santos Moreira RM93101
 
+## Arquivo YAML
+```
+variables:
+- name: BuildParameters.mavenPOMFile
+  value: pom.xml
+trigger:
+  branches:
+    include:
+    - refs/heads/main
+name: $(date:yyyyMMdd)$(rev:.r)
+jobs:
+- job: Job_1
+  displayName: Build
+  pool:
+    vmImage: windows-latest
+  steps:
+  - checkout: self
+    fetchDepth: 1
+  - task: Maven@3
+    displayName: 'Maven '
+    inputs:
+      mavenPOMFile: $(BuildParameters.mavenPOMFile)
+      jdkVersion: 1.17
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+    condition: succeededOrFailed()
+    inputs:
+      SourceFolder: $(system.defaultworkingdirectory)
+      Contents: '**/*.jar'
+      TargetFolder: $(build.artifactstagingdirectory)
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    condition: succeededOrFailed()
+    inputs:
+      PathtoPublish: $(build.artifactstagingdirectory)
+...
+
+```
+
 ## Utilização
 
 Clone o repositório
